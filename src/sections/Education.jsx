@@ -66,15 +66,23 @@ const Education = () => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-5">
-                    <a href="https://hithaldia.ac.in/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex-shrink-0">
-                      <img src="/images/hit.jpg" alt="HIT Logo" className="w-full h-full object-contain" />
+                    <a
+                      href="https://hithaldia.ac.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 flex-shrink-0"
+                    >
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/hit.jpg`}
+                        alt="HIT Logo"
+                        className="w-full h-full object-contain"
+                      />
                     </a>
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Bachelor of Technology</h3>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600 mb-5">
                     <HiBuildingLibrary className="w-5 h-5 text-blue-600 flex-shrink-0" />
                     <span className="text-sm sm:text-base">
-                      {/* Added Link Here */}
                       <a 
                         href="https://hithaldia.ac.in/" 
                         target="_blank" 
@@ -106,15 +114,23 @@ const Education = () => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-5">
-                    <a href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex-shrink-0">
-                      <img src="/images/school-logo.png" alt="School Logo" className="w-full h-full object-contain" />
+                    <a
+                      href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 flex-shrink-0"
+                    >
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/school-logo.png`}
+                        alt="School Logo"
+                        className="w-full h-full object-contain"
+                      />
                     </a>
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Higher Secondary (Class XII)</h3>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600 mb-5">
                     <HiBuildingLibrary className="w-5 h-5 text-blue-600 flex-shrink-0" />
                     <span className="text-sm sm:text-base">
-                      {/* Added Link Here */}
                       <a 
                         href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805" 
                         target="_blank" 
@@ -146,15 +162,23 @@ const Education = () => {
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-5">
-                    <a href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805" target="_blank" rel="noopener noreferrer" className="w-12 h-12 flex-shrink-0">
-                      <img src="/images/school-logo.png" alt="School Logo" className="w-full h-full object-contain" />
+                    <a
+                      href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-12 h-12 flex-shrink-0"
+                    >
+                      <img
+                        src={`${import.meta.env.BASE_URL}images/school-logo.png`}
+                        alt="School Logo"
+                        className="w-full h-full object-contain"
+                      />
                     </a>
                     <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Secondary (Class X)</h3>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600 mb-5">
                     <HiBuildingLibrary className="w-5 h-5 text-blue-600 flex-shrink-0" />
                     <span className="text-sm sm:text-base">
-                      {/* Added Link Here */}
                       <a 
                         href="https://school.banglarshiksha.gov.in/ws/website/index/19121207805" 
                         target="_blank" 

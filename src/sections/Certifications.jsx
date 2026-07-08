@@ -11,7 +11,7 @@ const certifications = [
     date: "May 2026",
     description:
       "5 Certifications & Skill Badges covering Cloud Computing, Networking, Compute Engine, and Kubernetes.",
-    logo: "/images/google.png",
+    logo: `${import.meta.env.BASE_URL}images/google.png`,
     link:
       "https://www.credly.com/badges/4ece1ca6-d77b-4404-9a5a-7ffe194a27cd/linked_in_profile",
   },
@@ -20,7 +20,7 @@ const certifications = [
     date: "Apr 2026",
     description:
       "Industry certification validating foundational knowledge of AI, Machine Learning, Generative AI, and Oracle Cloud Infrastructure.",
-    logo: "/images/oracle.png",
+    logo: `${import.meta.env.BASE_URL}images/oracle.png`,
     link:
       "https://catalog-education.oracle.com/ords/certview/sharebadge?id=237C35D944A9312F5125A07D1FF66A8549FB1D16CBD94A92F28E070E39954354",
   },
@@ -29,7 +29,7 @@ const certifications = [
     date: "Apr 2026",
     description:
       "Hands-on experience in cybersecurity, threat analysis, and risk assessment.",
-    logo: "/images/tata.png",
+    logo: `${import.meta.env.BASE_URL}images/tata.png`,
     link:
       "https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/gmf3ypEXBj2wvfQWC_ifobHAoMjQs9s6bKS_69ea65088e60d413d531726d_1776971251105_completion_certificate.pdf",
   },
@@ -38,7 +38,7 @@ const certifications = [
     date: "Apr 2026",
     description:
       "Practical simulation focused on incident response, cyber risk, and security consulting.",
-    logo: "/images/deloitte.avif",
+    logo: `${import.meta.env.BASE_URL}images/deloitte.avif`,
     link:
       "https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/E9pA6qsdbeyEkp3ti_9PBTqmSxAf6zZTseP_69ea65088e60d413d531726d_1776969352007_completion_certificate.pdf",
   },
@@ -47,7 +47,7 @@ const certifications = [
     date: "Apr 2025",
     description:
       "Foundation in data analytics, visualization, and statistical analysis.",
-    logo: "/images/pw.png",
+    logo: `${import.meta.env.BASE_URL}images/pw.png`,
     link:
       "https://cdn.pwskills.com/learn/certificates/fef55c60-82bb-43d2-b9f5-637f3dbfe57e.pdf",
   },

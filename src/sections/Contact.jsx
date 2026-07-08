@@ -6,19 +6,19 @@ import { HiMapPin, HiLink, HiPaperAirplane, HiCheck, HiClipboard, HiExclamationC
 const socialLinks = [
   {
     name: 'GitHub',
-    logo: '/images/github.png',
+    logo: `${import.meta.env.BASE_URL}images/github.png`,
     href: 'https://github.com/Sayann18',
     brandStyle: 'hover:shadow-[0_0_20px_rgba(24,23,23,0.3)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(255,255,255,0.4)] dark:hover:bg-white/10 dark:hover:border-white/50',
   },
   {
     name: 'LinkedIn',
-    logo: '/images/linkedin.png',
+    logo: `${import.meta.env.BASE_URL}images/linkedin.png`,
     href: 'https://www.linkedin.com/in/chakrabortysayan',
     brandStyle: 'hover:shadow-[0_0_20px_rgba(10,102,194,0.4)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(10,102,194,0.5)] dark:hover:bg-blue-500/15 dark:hover:border-blue-500/50',
   },
   {
     name: 'Instagram',
-    logo: '/images/insta.jpg',
+    logo: `${import.meta.env.BASE_URL}images/insta.jpg`,
     href: 'https://www.instagram.com/amiisayan?igsh=MWt0dGh0M2llbnN1bw==',
     brandStyle: 'hover:shadow-[0_0_20px_rgba(228,64,95,0.4)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(225,48,108,0.5)] dark:hover:bg-pink-500/15 dark:hover:border-pink-500/50',
   },
@@ -121,10 +121,10 @@ const Contact = () => {
               <motion.div variants={itemVariants} className="glass-card p-5 sm:p-6 group transition-all duration-300 hover:border-rose-400/40 hover:bg-rose-500/5 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(225,29,72,0.12)]">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 rounded-2xl bg-white/40 dark:bg-slate-800/40 backdrop-blur-md border-2 border-white/60 dark:border-white/10 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.4)] flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform duration-300">
-                    <img 
-                      src="/images/gmail.jpg" 
-                      alt="Gmail" 
-                      className="w-full h-full object-contain transition-all duration-300 dark:brightness-95 dark:contrast-110 rounded-lg" 
+                    <img
+                      src={`${import.meta.env.BASE_URL}images/gmail.jpg`}
+                      alt="Gmail"
+                      className="w-full h-full object-contain transition-all duration-300 dark:brightness-95 dark:contrast-110 rounded-lg"
                     />
                   </div>
                   <span className="text-sm text-gray-500 font-medium">Email</span>

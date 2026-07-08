@@ -45,7 +45,7 @@ const Experience = () => {
               
               <div className="w-16 h-16 rounded-2xl bg-white/40 backdrop-blur-md border-2 border-white/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-center p-2.5 mb-5 group-hover:scale-110 transition-transform duration-300">
                 <img
-                  src="/images/flyrank-logo.png"
+                  src={`${import.meta.env.BASE_URL}images/flyrank-logo.png`}
                   alt="FlyRank AI"
                   className="w-full h-full object-contain drop-shadow-sm"
                   loading="lazy"

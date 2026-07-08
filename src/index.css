@@ -1,4 +1,3 @@
-
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -93,7 +92,7 @@ body::after {
             rgba(129,140,248,0.12) 0%,
             transparent 65%
         ),
-        url("/images/background/tribal-pattern.png");
+        url("./images/background/tribal-pattern.png"); /* Fixed for GH Pages */
 
     background-size: cover;
     background-position: center;
@@ -123,7 +122,7 @@ body::after {
             rgba(59, 130, 246, 0.04),
             transparent 48%
         ),
-        url("/images/background/dark-pattern.png");
+        url("./images/background/dark-pattern.png"); /* Fixed for GH Pages */
 
     background-size: cover;
     background-position: center;
@@ -136,256 +135,181 @@ body::after {
         background .6s ease;
 }
 
+/* =========================================
+   1. BASE STYLES (LIGHT MODE)
+========================================= */
+
 .glass {
-  background: rgba(255, 255, 255, 0.10);
-
-  backdrop-filter: blur(18px) saturate(200%);
-  -webkit-backdrop-filter: blur(18px) saturate(200%);
-
-  border: 1px solid rgba(255, 255, 255, 0.50);
-
-  border-radius: 12px;
-
-  box-shadow:
-    0 10px 30px rgba(15,23,42,.06),
-    inset 0 1px 0 rgba(255,255,255,.70);
-
-  transform: translateZ(0);
-  backface-visibility: hidden;
-
-  transition:
-      background .45s ease,
-      border-color .45s ease,
-      box-shadow .45s ease,
-      transform .45s cubic-bezier(.22,.61,.36,1);
-}
-
-.dark .glass {
-  background: rgba(15,23,42,.12);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  
-  /* Halved from 0.16 */
-  border: 1px solid rgba(255,255,255,.08);
-  
-  box-shadow:
-      0 8px 24px rgba(0,0,0,.35),
-      /* Halved from 0.08 */
-      inset 0 1px 0 rgba(255,255,255,.04);
-}
-
-.glass-card{
-    background:
-      linear-gradient(
-      135deg,
-      rgba(255,255,255,.22),
-      rgba(255,255,255,.12)
-      );
-
-    backdrop-filter:blur(3px) saturate(180%);
-    -webkit-backdrop-filter:blur(3px) saturate(180%);
-
-    border:1px solid rgba(255,255,255,0.55);
-
-    border-radius:12px;
-
-    position:relative;
-    overflow:hidden;
-
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    border-radius: 9999px; /* Capsule shape */
     box-shadow:
-      0 14px 36px rgba(15,23,42,.07),
-      0 2px 10px rgba(15,23,42,.03),
-      inset 0 1px 0 rgba(255,255,255,.75);
-
+        0 10px 30px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    isolation: isolate;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
     transition:
-        transform .45s cubic-bezier(.22,.61,.36,1),
-        box-shadow .45s cubic-bezier(.22,.61,.36,1),
-        border-color .45s ease;
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
 }
+
+.glass-card,
+.glass-strong {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.34),
+        rgba(255, 255, 255, 0.20)
+    );
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+        0 16px 42px rgba(15, 23, 42, 0.10),
+        0 4px 16px rgba(15, 23, 42, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.60);
+    isolation: isolate;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition:
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+/* =========================================
+   2. BORDER SHINE PSEUDO-ELEMENTS
+========================================= */
+
+.glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.55),
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.40)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* =========================================
+   3. TYPOGRAPHY (LIGHT MODE)
+========================================= */
 
 .glass-card h1,
 .glass-card h2,
 .glass-card h3,
 .glass-card h4,
 .glass-card h5,
-.glass-card h6{
-
-    color:#050505;
-
-    font-weight:700;
-
-    letter-spacing:-0.02em;
+.glass-card h6 {
+    color: #050505;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
+/* =========================================
+   4. HOVER STATES (LIGHT MODE)
+========================================= */
+
+.glass:hover,
+.glass-card:hover,
+.glass-strong:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.30);
+    box-shadow:
+        0 22px 52px rgba(15, 23, 42, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+/* =========================================
+   5. DARK MODE OVERRIDES
+========================================= */
+
+/* Dark Base: Capsule Element */
+.dark .glass {
+    background: rgba(10, 18, 35, 0.38);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Dark Base: Card Elements */
+.dark .glass-card,
+.dark .glass-strong {
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.38),
+        rgba(15, 23, 42, 0.24)
+    );
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow:
+        0 18px 46px rgba(0, 0, 0, 0.48),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Dark Border Shine */
+.dark .glass-card::before {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.20),
+        rgba(255, 255, 255, 0.03),
+        rgba(255, 255, 255, 0.18)
+    );
+}
+
+/* Dark Typography */
 .dark .glass-card h1,
 .dark .glass-card h2,
 .dark .glass-card h3,
 .dark .glass-card h4,
 .dark .glass-card h5,
-.dark .glass-card h6{
-
-    color:#ffffff;
+.dark .glass-card h6 {
+    color: #fff;
 }
+
 .dark .glass-card p {
     color: #e2e8f0;
 }
 
-.dark .glass-card{
-
-    background:rgba(15,23,42,.10);
-
-    border:1px solid rgba(255,255,255,.08);
-
+/* Dark Hover States */
+.dark .glass:hover,
+.dark .glass-card:hover,
+.dark .glass-strong:hover {
+    border-color: rgba(255, 255, 255, 0.18);
     box-shadow:
-        0 16px 40px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.04);
-}
-.glass-card::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    border-radius:inherit;
-
-    padding:1px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.75),
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.55)
-        );
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-
-    pointer-events:none;
-}
-.dark .glass-card::before{
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.4),
-            rgba(255,255,255,.03),
-            rgba(255,255,255,.4)
-        );
-}
-.glass-card:hover{
-
-    transform:translateY(-3px);
-
-    border-color:rgba(255,255,255,.55);
-
-    box-shadow:
-
-        0 16px 40px rgba(15,23,42,.08),
-
-        inset 0 1px 0 rgba(255,255,255,.60);
-
-}
-
-.dark .glass-card:hover::before{
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.32),
-        rgba(191,219,254,.14),
-        rgba(255,255,255,.22)
-    );
-
-    opacity: 1;
-}
-
-.glass-card:hover::after{
-
-    opacity:1;
-}
-
-
-
-.glass-card::after{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    border-radius:inherit;
-
-    background:
-
-radial-gradient(
-circle at top left,
-rgba(255,255,255,.60),
-transparent 15%
-),
-
-radial-gradient(
-circle at bottom right,
-rgba(255,255,255,.35),
-transparent 30%
-);
-
-    opacity:0;
-
-    transition:
-        opacity .45s ease;
-
-    pointer-events:none;
-}
-
-.dark .glass-card::after{
-
-    background:
-
-        radial-gradient(
-            circle at top left,
-            rgba(255,255,255,.18),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at bottom right,
-            rgba(147,197,253,.10),
-            transparent 35%
-        );
-}
-
-.dark .glass-card:hover{
-
-    border-color:rgba(255,255,255,.12);
-
-    box-shadow:
-
-        0 16px 40px rgba(0,0,0,.65),
-
-        inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-.glass-strong {
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(12px) saturate(170%);
-  -webkit-backdrop-filter: blur(12px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.45);
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  transition: all 0.5s ease;
-}
-.dark .glass-strong {
-  background: rgba(15, 23, 42, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+        0 22px 52px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
 }
 
 
@@ -489,11 +413,10 @@ transparent 30%
   align-items: center;
   gap: 1rem;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #111111;
-font-weight: 600;
   margin-bottom: 1.5rem;
 }
 
@@ -678,24 +601,26 @@ textarea.form-input {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.nav-pill-active{
+/* Merged .nav-pill-active block */
+.nav-pill-active {
+  background: rgba(71, 85, 105, 0.12);
+  color: #334155;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  
+  /* Forces the perfectly rounded pill shape */
+  border-radius: 9999px; 
 
   box-shadow:
       0 6px 18px rgba(0,0,0,.08),
       inset 0 1px 0 rgba(255,255,255,.35);
 }
 
-.nav-pill-active{
-  background: rgba(71,85,105,.12);
-  color:#334155;
+.dark .nav-pill-active {
+  background: rgba(255,255,255,.08);
+  color: #f8fafc;
 }
 
-.dark .nav-pill-active{
-  background: rgba(255,255,255,.08);
-  color:#f8fafc;
-}
 .timeline-line {
   position: absolute;
   left: 20px;
@@ -931,7 +856,7 @@ html.lenis body {
 }
 
 .dark .social-icon {
-    background: rgba(15, 23, 42, 0.4) !important; /* Replaces the heavy white with a sleek dark glass */
+    background: rgba(15, 23, 42, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
     transition: all 0.3s ease;
@@ -966,7 +891,8 @@ html.lenis body {
 .dark .social-icon.instagram:hover {
     background: rgba(225, 48, 108, 0.15) !important;
     box-shadow: 0 0 24px rgba(225, 48, 108, 0.5) !important;
-}v
+} /* Removed the syntax-breaking 'v' here */
+
 .dark .social-icon img {
   filter:
     brightness(0.96)
@@ -986,3 +912,51 @@ html.lenis body {
 
   transform: scale(1.05);
 }
+
+/* ==========================================
+   MOBILE BACKGROUND (Minimal Premium)
+   ========================================== */
+
+@media (max-width: 768px) {
+
+  body::before {
+    display: none;
+  }
+
+  /* Light Theme */
+  body::after {
+    background:
+      radial-gradient(
+        circle at top right,
+        rgba(59,130,246,.012),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at bottom left,
+        rgba(99,102,241,.008),
+        transparent 40%
+      ),
+      linear-gradient(
+        180deg,
+        #F7F2EA 0%,
+        #F2ECE2 45%,
+        #EAE2D5 100%
+      ) !important;
+
+    opacity: 1;
+  }
+
+  /* Dark Theme */
+  .dark body::after {
+    background:
+      linear-gradient(
+        180deg,
+        #020617 0%,
+        #071327 45%,
+        #050c15 100%
+      ) !important;
+
+    opacity: 1;
+  }
+}
+/* Removed extra trailing bracket here */

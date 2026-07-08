@@ -92,7 +92,7 @@ body::after {
             rgba(129,140,248,0.12) 0%,
             transparent 65%
         ),
-        url("./images/background/tribal-pattern.png"); /* Fixed for GH Pages */
+        url("/images/background/tribal-pattern.png"); /* Fixed for GH Pages */
 
     background-size: cover;
     background-position: center;
@@ -122,7 +122,7 @@ body::after {
             rgba(59, 130, 246, 0.04),
             transparent 48%
         ),
-        url("./images/background/dark-pattern.png"); /* Fixed for GH Pages */
+        url("/images/background/dark-pattern.png"); /* Fixed for GH Pages */
 
     background-size: cover;
     background-position: center;

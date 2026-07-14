@@ -92,7 +92,7 @@ body::after {
             rgba(129,140,248,0.12) 0%,
             transparent 65%
         ),
-        url("/images/background/tribal-pattern.png"); /* Fixed for GH Pages */
+        url("/images/background/tribal-pattern.png");
 
     background-size: cover;
     background-position: center;
@@ -122,7 +122,7 @@ body::after {
             rgba(59, 130, 246, 0.04),
             transparent 48%
         ),
-        url("/images/background/dark-pattern.png"); /* Fixed for GH Pages */
+        url("/images/background/dark-pattern.png"); 
 
     background-size: cover;
     background-position: center;
@@ -135,16 +135,13 @@ body::after {
         background .6s ease;
 }
 
-/* =========================================
-   1. BASE STYLES (LIGHT MODE)
-========================================= */
 
 .glass {
     background: rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 2px solid rgba(255, 255, 255, 0.22);
-    border-radius: 9999px; /* Capsule shape */
+    border-radius: 9999px;
     box-shadow:
         0 10px 30px rgba(15, 23, 42, 0.08),
         inset 0 1px 0 rgba(255, 255, 255, 0.45);
@@ -190,9 +187,6 @@ body::after {
         transform 0.35s ease;
 }
 
-/* =========================================
-   2. BORDER SHINE PSEUDO-ELEMENTS
-========================================= */
 
 .glass-card::before {
     content: "";
@@ -217,9 +211,6 @@ body::after {
     pointer-events: none;
 }
 
-/* =========================================
-   3. TYPOGRAPHY (LIGHT MODE)
-========================================= */
 
 .glass-card h1,
 .glass-card h2,
@@ -232,10 +223,6 @@ body::after {
     letter-spacing: -0.02em;
 }
 
-/* =========================================
-   4. HOVER STATES (LIGHT MODE)
-========================================= */
-
 .glass:hover,
 .glass-card:hover,
 .glass-strong:hover {
@@ -246,11 +233,6 @@ body::after {
         inset 0 1px 0 rgba(255, 255, 255, 0.70);
 }
 
-/* =========================================
-   5. DARK MODE OVERRIDES
-========================================= */
-
-/* Dark Base: Capsule Element */
 .dark .glass {
     background: rgba(10, 18, 35, 0.38);
     backdrop-filter: blur(24px) saturate(180%);
@@ -262,7 +244,6 @@ body::after {
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Dark Base: Card Elements */
 .dark .glass-card,
 .dark .glass-strong {
     background: linear-gradient(
@@ -278,7 +259,6 @@ body::after {
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* Dark Border Shine */
 .dark .glass-card::before {
     background: linear-gradient(
         135deg,
@@ -288,7 +268,6 @@ body::after {
     );
 }
 
-/* Dark Typography */
 .dark .glass-card h1,
 .dark .glass-card h2,
 .dark .glass-card h3,
@@ -302,7 +281,6 @@ body::after {
     color: #e2e8f0;
 }
 
-/* Dark Hover States */
 .dark .glass:hover,
 .dark .glass-card:hover,
 .dark .glass-strong:hover {
@@ -490,14 +468,12 @@ body::after {
         inset 0 1px 0 rgba(255,255,255,.85);
 }
 
-/* ---------- TEXTAREA ---------- */
 
 textarea.form-input {
   min-height: 180px;
   resize: vertical;
 }
 
-/* ---------- DARK MODE ---------- */
 
 .dark .form-input {
   background: rgba(15,23,42,.26);
@@ -601,14 +577,12 @@ textarea.form-input {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Merged .nav-pill-active block */
 .nav-pill-active {
   background: rgba(71, 85, 105, 0.12);
   color: #334155;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   
-  /* Forces the perfectly rounded pill shape */
   border-radius: 9999px; 
 
   box-shadow:
@@ -891,7 +865,7 @@ html.lenis body {
 .dark .social-icon.instagram:hover {
     background: rgba(225, 48, 108, 0.15) !important;
     box-shadow: 0 0 24px rgba(225, 48, 108, 0.5) !important;
-} /* Removed the syntax-breaking 'v' here */
+}
 
 .dark .social-icon img {
   filter:
@@ -913,9 +887,6 @@ html.lenis body {
   transform: scale(1.05);
 }
 
-/* ==========================================
-   MOBILE BACKGROUND (Minimal Premium)
-   ========================================== */
 
 @media (max-width: 768px) {
 
@@ -923,7 +894,6 @@ html.lenis body {
     display: none;
   }
 
-  /* Light Theme */
   body::after {
     background:
       radial-gradient(
@@ -946,7 +916,6 @@ html.lenis body {
     opacity: 1;
   }
 
-  /* Dark Theme */
   .dark body::after {
     background:
       linear-gradient(
@@ -959,4 +928,3 @@ html.lenis body {
     opacity: 1;
   }
 }
-/* Removed extra trailing bracket here */

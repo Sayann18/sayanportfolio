@@ -20,12 +20,12 @@ const achievements = [
     textGradient: 'from-purple-600 to-fuchsia-600',
     glow: 'shadow-[0_0_15px_rgba(168,85,247,0.15)] group-hover:shadow-[0_0_25px_rgba(168,85,247,0.35)] group-hover:border-purple-200/50',
   },
-  {
-    title: '8.58 CGPA',
-    description: 'Maintaining good academic performance.',
-    textGradient: 'from-amber-500 to-orange-600',
-    glow: 'shadow-[0_0_15px_rgba(245,158,11,0.15)] group-hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] group-hover:border-amber-200/50',
-  },
+  // {
+  //   title: '8.58 CGPA',
+  //   description: 'Maintaining good academic performance.',
+  //   textGradient: 'from-amber-500 to-orange-600',
+  //   glow: 'shadow-[0_0_15px_rgba(245,158,11,0.15)] group-hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] group-hover:border-amber-200/50',
+  // },
   {
     title: 'AI Intern at FlyRank',
     description: 'Professional experience in Communication, collaborative workflows, and modern software engineering practices.',

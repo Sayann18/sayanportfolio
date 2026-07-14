@@ -96,7 +96,7 @@ const Education = () => {
                   </div>
                   <p className="text-base sm:text-lg text-gray-700 mb-2">Computer Science & Engineering</p>
                   <p className="text-slate-500 font-medium text-sm sm:text-base mb-4">Specialization: Cyber Security</p>
-                  <p className="text-sm sm:text-base text-gray-600">CGPA : <span className="font-semibold text-slate-500">8.58 / 10</span> (Up to 3rd Semester)</p>
+                  <p className="text-sm sm:text-base text-gray-600">CGPA : <span className="font-semibold text-slate-500">8.67 / 10</span> (Up to 4th Semester)</p>
                 </div>
                 <div className="sm:text-right flex-shrink-0">
                   <span className="inline-block px-4 py-1.5 rounded-full bg-slate-500/10 border border-slate-500/20 text-slate-500 text-sm font-medium">2024 – 2028</span>

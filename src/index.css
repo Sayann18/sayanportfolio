@@ -187,8 +187,6 @@ body::after {
         transform 0.35s ease;
 }
 
-/* Navigation uses a dedicated glass layer so its appearance does not depend on
-   transformed or clipped shared card styles in a production build. */
 .portfolio-nav-desktop {
   position: fixed;
   inset-inline: 0;
@@ -1048,6 +1046,15 @@ html.lenis body {
     opacity: 1;
   }
 }
+
+.theme-transitioning,
 .theme-transitioning * {
   transition: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.theme-reveal-active::view-transition-new(root),
+.theme-reveal-active::view-transition-old(root) {
+  will-change: clip-path;
 }

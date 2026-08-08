@@ -97,9 +97,15 @@
 import { useCallback, useRef } from 'react'
 
 const REVEAL_DURATION = 1200
+const REVEAL_DURATION_MOBILE = 950
 const REVEAL_EASING = 'cubic-bezier(0.22, 0.85, 0.32, 1)'
 
 const RADIUS_OVERSHOOT = 150
+
+const REVEAL_START_EVENT = 'theme-reveal-start'
+const REVEAL_END_EVENT = 'theme-reveal-end'
+
+const MOBILE_BREAKPOINT = 768
 
 const getRevealMetrics = (element) => {
   const liveTransform = element.style.transform
@@ -109,15 +115,6 @@ const getRevealMetrics = (element) => {
 
   const x = rect.left + rect.width / 2
   const y = rect.top + rect.height / 2
-
-  console.log('[theme-reveal-debug]', {
-    measuredElement: element,
-    rect,
-    x,
-    y,
-    innerWidth: window.innerWidth,
-    innerHeight: window.innerHeight,
-  })
 
   const radius = Math.hypot(
     Math.max(x, window.innerWidth - x),
@@ -139,7 +136,6 @@ const createFallbackLayer = (isDarkMode, { x, y }) => {
 
 export default function useThemeTransition(isDarkMode, applyTheme) {
   const isTransitioning = useRef(false)
-
   const toggleTheme = useCallback((eventOrElement) => {
     if (isTransitioning.current) return
 
@@ -151,20 +147,24 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isMobileViewport = window.innerWidth <= MOBILE_BREAKPOINT
     const metrics = getRevealMetrics(toggle)
     isTransitioning.current = true
+    window.dispatchEvent(new CustomEvent(REVEAL_START_EVENT))
 
     const finish = () => {
       isTransitioning.current = false
       toggle.disabled = false
       toggle.removeAttribute('data-theme-transitioning')
       document.documentElement.classList.remove('theme-transitioning')
+      document.documentElement.classList.remove('theme-reveal-active')
+      window.dispatchEvent(new CustomEvent(REVEAL_END_EVENT))
     }
 
     toggle.disabled = true
     toggle.setAttribute('data-theme-transitioning', 'true')
-  
     document.documentElement.classList.add('theme-transitioning')
+    document.documentElement.classList.add('theme-reveal-active')
 
     if (prefersReducedMotion) {
       applyTheme()
@@ -174,6 +174,8 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
       ).finished.finally(finish)
       return
     }
+
+    const duration = isMobileViewport ? REVEAL_DURATION_MOBILE : REVEAL_DURATION
 
     if (typeof document.startViewTransition === 'function') {
       const transition = document.startViewTransition(() => applyTheme())
@@ -186,7 +188,7 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
               `circle(${metrics.radius}px at ${metrics.x}px ${metrics.y}px)`,
             ],
           },
-          { duration: REVEAL_DURATION, easing: REVEAL_EASING, pseudoElement: '::view-transition-new(root)' },
+          { duration, easing: REVEAL_EASING, pseudoElement: '::view-transition-new(root)' },
         ).finished)
         .catch(() => undefined)
         .finally(finish)
@@ -196,7 +198,7 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
     const fallbackLayer = createFallbackLayer(isDarkMode, metrics)
     fallbackLayer.animate(
       { clipPath: [`circle(0px at ${metrics.x}px ${metrics.y}px)`, `circle(${metrics.radius}px at ${metrics.x}px ${metrics.y}px)`] },
-      { duration: 970, easing: REVEAL_EASING, fill: 'forwards' },
+      { duration: isMobileViewport ? 780 : 970, easing: REVEAL_EASING, fill: 'forwards' },
     ).finished
       .then(() => {
         applyTheme()
@@ -211,3 +213,5 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
 
   return toggleTheme
 }
+
+export { REVEAL_START_EVENT, REVEAL_END_EVENT }

@@ -94,34 +94,180 @@
 //   return toggleTheme
 // }
 
+// import { useCallback, useRef } from 'react'
+
+// const REVEAL_DURATION = 1200
+// const REVEAL_DURATION_MOBILE = 950
+// const REVEAL_EASING = 'cubic-bezier(0.22, 0.85, 0.32, 1)'
+
+// const RADIUS_OVERSHOOT = 150
+
+// const REVEAL_START_EVENT = 'theme-reveal-start'
+// const REVEAL_END_EVENT = 'theme-reveal-end'
+
+// const MOBILE_BREAKPOINT = 768
+
+// const getRevealMetrics = (element) => {
+//   const liveTransform = element.style.transform
+//   element.style.transform = 'none'
+//   const rect = element.getBoundingClientRect()
+//   element.style.transform = liveTransform
+
+//   const x = rect.left + rect.width / 2
+//   const y = rect.top + rect.height / 2
+
+//   const radius = Math.hypot(
+//     Math.max(x, window.innerWidth - x),
+//     Math.max(y, window.innerHeight - y),
+//   ) + RADIUS_OVERSHOOT
+
+//   return { x, y, radius }
+// }
+
+// const createFallbackLayer = (isDarkMode, { x, y }) => {
+//   const layer = document.createElement('div')
+//   layer.className = 'theme-reveal-fallback'
+//   layer.style.setProperty('--theme-reveal-x', `${x}px`)
+//   layer.style.setProperty('--theme-reveal-y', `${y}px`)
+//   layer.style.background = isDarkMode ? '#f7f2ea' : '#020617'
+//   document.body.appendChild(layer)
+//   return layer
+// }
+
+// export default function useThemeTransition(isDarkMode, applyTheme) {
+//   const isTransitioning = useRef(false)
+//   const toggleTheme = useCallback((eventOrElement) => {
+//     if (isTransitioning.current) return
+
+//     const toggle = eventOrElement?.currentTarget ?? eventOrElement
+
+//     if (!toggle || typeof window === 'undefined' || typeof toggle.getBoundingClientRect !== 'function') {
+//       applyTheme()
+//       return
+//     }
+
+//     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+//     const isMobileViewport = window.innerWidth <= MOBILE_BREAKPOINT
+//     const metrics = getRevealMetrics(toggle)
+//     isTransitioning.current = true
+//     window.dispatchEvent(new CustomEvent(REVEAL_START_EVENT))
+
+//     const finish = () => {
+//       isTransitioning.current = false
+//       toggle.disabled = false
+//       toggle.removeAttribute('data-theme-transitioning')
+//       document.documentElement.classList.remove('theme-transitioning')
+//       document.documentElement.classList.remove('theme-reveal-active')
+//       window.dispatchEvent(new CustomEvent(REVEAL_END_EVENT))
+//     }
+
+//     toggle.disabled = true
+//     toggle.setAttribute('data-theme-transitioning', 'true')
+//     document.documentElement.classList.add('theme-transitioning')
+//     document.documentElement.classList.add('theme-reveal-active')
+
+//     if (prefersReducedMotion) {
+//       applyTheme()
+//       document.documentElement.animate(
+//         { opacity: [0.92, 1] },
+//         { duration: 180, easing: 'ease-out' },
+//       ).finished.finally(finish)
+//       return
+//     }
+
+//     const duration = isMobileViewport ? REVEAL_DURATION_MOBILE : REVEAL_DURATION
+
+//     if (typeof document.startViewTransition === 'function') {
+//       const transition = document.startViewTransition(() => applyTheme())
+
+//       transition.ready
+//         .then(() => document.documentElement.animate(
+//           {
+//             clipPath: [
+//               `circle(0px at ${metrics.x}px ${metrics.y}px)`,
+//               `circle(${metrics.radius}px at ${metrics.x}px ${metrics.y}px)`,
+//             ],
+//           },
+//           { duration, easing: REVEAL_EASING, pseudoElement: '::view-transition-new(root)' },
+//         ).finished)
+//         .catch(() => undefined)
+//         .finally(finish)
+//       return
+//     }
+
+//     const fallbackLayer = createFallbackLayer(isDarkMode, metrics)
+//     fallbackLayer.animate(
+//       { clipPath: [`circle(0px at ${metrics.x}px ${metrics.y}px)`, `circle(${metrics.radius}px at ${metrics.x}px ${metrics.y}px)`] },
+//       { duration: isMobileViewport ? 780 : 970, easing: REVEAL_EASING, fill: 'forwards' },
+//     ).finished
+//       .then(() => {
+//         applyTheme()
+//         return fallbackLayer.animate({ opacity: [1, 0] }, { duration: 180, easing: 'ease-out', fill: 'forwards' }).finished
+//       })
+//       .catch(() => undefined)
+//       .finally(() => {
+//         fallbackLayer.remove()
+//         finish()
+//       })
+//   }, [applyTheme, isDarkMode])
+
+//   return toggleTheme
+// }
+
+// export { REVEAL_START_EVENT, REVEAL_END_EVENT }
+
+
 import { useCallback, useRef } from 'react'
 
 const REVEAL_DURATION = 1200
 const REVEAL_DURATION_MOBILE = 950
 const REVEAL_EASING = 'cubic-bezier(0.22, 0.85, 0.32, 1)'
-
 const RADIUS_OVERSHOOT = 150
+const MOBILE_BREAKPOINT = 768
 
 const REVEAL_START_EVENT = 'theme-reveal-start'
 const REVEAL_END_EVENT = 'theme-reveal-end'
 
-const MOBILE_BREAKPOINT = 768
+const getRevealMetrics = (event, element) => {
+  let x, y;
 
-const getRevealMetrics = (element) => {
-  const liveTransform = element.style.transform
-  element.style.transform = 'none'
-  const rect = element.getBoundingClientRect()
-  element.style.transform = liveTransform
+  // 1. Precise origin: Use direct touch/click coordinates if available to prevent origin bugs
+  if (event) {
+    if (typeof event.clientX === 'number' && event.clientX > 0) {
+      x = event.clientX;
+      y = event.clientY;
+    } else if (event.touches?.length > 0) {
+      x = event.touches[0].clientX;
+      y = event.touches[0].clientY;
+    } else if (event.changedTouches?.length > 0) {
+      x = event.changedTouches[0].clientX;
+      y = event.changedTouches[0].clientY;
+    }
+  }
 
-  const x = rect.left + rect.width / 2
-  const y = rect.top + rect.height / 2
+  // 2. Fallback: Measure the element (neutralizing any scale transforms)
+  if (x === undefined || y === undefined || (x === 0 && y === 0)) {
+    if (element && typeof element.getBoundingClientRect === 'function') {
+      const liveTransform = element.style.transform;
+      element.style.transform = 'none';
+      const rect = element.getBoundingClientRect();
+      element.style.transform = liveTransform;
+      
+      x = rect.left + rect.width / 2;
+      y = rect.top + rect.height / 2;
+    } else {
+      // 3. Last resort fallback: Screen center
+      x = window.innerWidth / 2;
+      y = window.innerHeight / 2;
+    }
+  }
 
   const radius = Math.hypot(
     Math.max(x, window.innerWidth - x),
     Math.max(y, window.innerHeight - y),
-  ) + RADIUS_OVERSHOOT
+  ) + RADIUS_OVERSHOOT;
 
-  return { x, y, radius }
+  return { x, y, radius };
 }
 
 const createFallbackLayer = (isDarkMode, { x, y }) => {
@@ -136,19 +282,23 @@ const createFallbackLayer = (isDarkMode, { x, y }) => {
 
 export default function useThemeTransition(isDarkMode, applyTheme) {
   const isTransitioning = useRef(false)
+
   const toggleTheme = useCallback((eventOrElement) => {
     if (isTransitioning.current) return
 
-    const toggle = eventOrElement?.currentTarget ?? eventOrElement
+    const isEvent = eventOrElement && typeof eventOrElement.preventDefault === 'function'
+    const event = isEvent ? eventOrElement : null
+    const toggle = isEvent ? eventOrElement.currentTarget : eventOrElement
 
-    if (!toggle || typeof window === 'undefined' || typeof toggle.getBoundingClientRect !== 'function') {
+    if (!toggle || typeof window === 'undefined') {
       applyTheme()
       return
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const isMobileViewport = window.innerWidth <= MOBILE_BREAKPOINT
-    const metrics = getRevealMetrics(toggle)
+    const metrics = getRevealMetrics(event, toggle)
+    
     isTransitioning.current = true
     window.dispatchEvent(new CustomEvent(REVEAL_START_EVENT))
 
@@ -156,15 +306,17 @@ export default function useThemeTransition(isDarkMode, applyTheme) {
       isTransitioning.current = false
       toggle.disabled = false
       toggle.removeAttribute('data-theme-transitioning')
-      document.documentElement.classList.remove('theme-transitioning')
-      document.documentElement.classList.remove('theme-reveal-active')
+      
+      // Batch class removal
+      document.documentElement.classList.remove('theme-transitioning', 'theme-reveal-active')
       window.dispatchEvent(new CustomEvent(REVEAL_END_EVENT))
     }
 
     toggle.disabled = true
     toggle.setAttribute('data-theme-transitioning', 'true')
-    document.documentElement.classList.add('theme-transitioning')
-    document.documentElement.classList.add('theme-reveal-active')
+    
+    // Batch class addition
+    document.documentElement.classList.add('theme-transitioning', 'theme-reveal-active')
 
     if (prefersReducedMotion) {
       applyTheme()

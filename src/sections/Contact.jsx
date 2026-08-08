@@ -2,25 +2,26 @@ import { useState, useRef, useCallback, memo } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { HiMapPin, HiLink, HiPaperAirplane, HiCheck, HiClipboard, HiExclamationCircle } from 'react-icons/hi2'
+import { FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 
 const socialLinks = [
   {
     name: 'GitHub',
-    logo: `${import.meta.env.BASE_URL}images/github.png`,
+    Icon: FaGithub,
     href: 'https://github.com/Sayann18',
-    brandStyle: 'hover:shadow-[0_0_20px_rgba(24,23,23,0.3)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(255,255,255,0.4)] dark:hover:bg-white/10 dark:hover:border-white/50',
+    platform: 'github',
   },
   {
     name: 'LinkedIn',
-    logo: `${import.meta.env.BASE_URL}images/linkedin.png`,
+    Icon: FaLinkedinIn,
     href: 'https://www.linkedin.com/in/chakrabortysayan',
-    brandStyle: 'hover:shadow-[0_0_20px_rgba(10,102,194,0.4)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(10,102,194,0.5)] dark:hover:bg-blue-500/15 dark:hover:border-blue-500/50',
+    platform: 'linkedin',
   },
   {
     name: 'Instagram',
-    logo: `${import.meta.env.BASE_URL}images/insta.jpg`,
+    Icon: FaInstagram,
     href: 'https://www.instagram.com/amiisayan?igsh=MWt0dGh0M2llbnN1bw==',
-    brandStyle: 'hover:shadow-[0_0_20px_rgba(228,64,95,0.4)] hover:-translate-y-1 dark:hover:shadow-[0_0_24px_rgba(225,48,108,0.5)] dark:hover:bg-pink-500/15 dark:hover:border-pink-500/50',
+    platform: 'instagram',
   },
 ]
 
@@ -166,20 +167,19 @@ const Contact = () => {
                 
                 <div className="flex gap-4">
                   {socialLinks.map((social) => (
-                    <a
+                    <motion.a
                       key={social.name}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center p-3 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/50 bg-white/40 backdrop-blur-md border-2 border-white/60 shadow-[inset_0_2px_4px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.05)] dark:bg-transparent dark:border-transparent dark:shadow-none dark:backdrop-blur-none ${social.brandStyle}`}
+                      className={`social-link ${social.platform}`}
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.94 }}
+                      transition={{ duration: 0.18, ease: 'easeOut' }}
                     >
-                      <img 
-                        src={social.logo} 
-                        alt={social.name} 
-                        className="w-full h-full object-contain drop-shadow-sm" 
-                      />
-                    </a>
+                      <social.Icon aria-hidden="true" />
+                    </motion.a>
                   ))}
                 </div>
               </motion.div>
